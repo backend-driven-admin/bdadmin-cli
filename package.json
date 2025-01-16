@@ -1,8 +1,11 @@
 {
   "name": "@bdadmin/cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "is a CLI package responsible for generating an admin panel",
   "main": "dist/index.js",
+  "bin": {
+    "@bdadmin/cli": "dist/index.js"
+  },
   "files": [
     "dist"
   ],
@@ -33,11 +36,14 @@
   },
   "homepage": "https://github.com/backend-driven-admin/bdadmin-cli#readme",
   "dependencies": {
+    "execa": "^9.0.0",
+    "inquirer": "^12.3.2",
     "ora": "^8.1.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.0",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^12.1.2",
