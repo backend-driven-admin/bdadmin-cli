@@ -1,12 +1,14 @@
 {
 	"name": "@bdadmin/cli",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "is a CLI package responsible for generating an admin panel",
 	"main": "dist/index.js",
 	"bin": {
 		"@bdadmin/cli": "dist/index.js"
 	},
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "rollup -c --bundleConfigAsCjs",
 		"format": "biome format --write .",
