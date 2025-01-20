@@ -1,0 +1,146 @@
+{
+	"entities": [
+		{
+			"name": "courses",
+			"endpoint": {
+				"url": "/courses",
+				"method": "GET"
+			},
+			"fields": [
+				{
+					"key": "id",
+					"type": "number",
+					"sort": true,
+					"search": true
+				},
+				{
+					"key": "name",
+					"type": "string",
+					"sort": true,
+					"search": true
+				},
+				{
+					"key": "description",
+					"type": "string",
+					"sort": true,
+					"search": true
+				},
+				{
+					"key": "artworkUrl",
+					"type": "string",
+					"sort": true,
+					"search": true
+				},
+				{
+					"key": "updatedAt",
+					"type": "date",
+					"sort": true
+				},
+				{
+					"key": "createdAt",
+					"type": "date",
+					"sort": true
+				},
+				{
+					"key": "lessons",
+					"type": "string"
+				}
+			],
+			"actions": [
+				{
+					"endpoint": {
+						"url": "/courses/create",
+						"method": "POST"
+					},
+					"fields": [
+						{
+							"key": "name",
+							"type": "string",
+							"min": 8,
+							"required": true,
+							"unique": true
+						},
+						{
+							"key": "description",
+							"type": "string",
+							"required": true
+						},
+						{
+							"key": "isPublic",
+							"type": "boolean",
+							"required": true
+						}
+					]
+				},
+				{
+					"endpoint": {
+						"url": "/courses/:id/update",
+						"method": "PATCH"
+					},
+					"fields": [
+						{
+							"key": "name",
+							"type": "string",
+							"min": 8,
+							"unique": true
+						},
+						{
+							"key": "description",
+							"type": "string"
+						},
+						{
+							"key": "isPublic",
+							"type": "boolean"
+						}
+					]
+				},
+				{
+					"endpoint": {
+						"url": "/courses/:id/delete",
+						"method": "DELETE"
+					},
+					"fields": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"settings": {
+			"accessKey": "access_token",
+			"refreshKey": "refresh_token"
+		},
+		"login": {
+			"endpoint": {
+				"url": "/login",
+				"method": "POST"
+			},
+			"fields": [
+				{
+					"key": "login",
+					"type": "string",
+					"min": 8,
+					"required": true,
+					"unique": true
+				},
+				{
+					"key": "password",
+					"type": "hidden",
+					"min": 8,
+					"required": true
+				}
+			]
+		},
+		"refresh": {
+			"endpoint": {
+				"url": "/refresh",
+				"method": "POST"
+			}
+		},
+		"logout": {
+			"endpoint": {
+				"url": "/logout",
+				"method": "POST"
+			}
+		}
+	}
+}

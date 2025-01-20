@@ -4,8 +4,10 @@ import ora from "ora";
 import { access, constants, readFile, rm } from "node:fs/promises";
 import inquirer from "inquirer";
 import validateConfig from "./utils/validateConfig";
-import { execa } from "execa";
 import checkDirectoryExists from "./utils/checkDirectoryExists";
+import { resolve } from "node:url";
+import { copyTemplateAndSubstitute } from "./utils/copyTemplateAndSubstitute";
+import {join} from "node:path";
 
 const program = new Command();
 program
@@ -26,7 +28,7 @@ program
 				process.exit(1);
 			}
 
-			let config: any = {};
+			let config = {};
 
 			if (/^https?:\/\//i.test(path)) {
 				const response = await fetch(path);
@@ -58,7 +60,7 @@ program
 				process.exit(1);
 			}
 
-			let projectName = "admin-panel";
+			let projectName = "react-swc-typescript";
 			let shouldOverwrite = false;
 			async function promptAndCheckProjectName() {
 				projectName = await promptProjectName();
@@ -85,11 +87,13 @@ program
 
 			if (shouldOverwrite)
 				await rm(projectName, { recursive: true, force: true });
-			await execa(
-				"npx",
-				["create-vite@latest", projectName, "--template", "react-swc-ts"],
-				{ env: { ...process.env, CI: "true" } },
+
+			const templateDir = resolve(
+				__dirname,
+				"./template",
 			);
+			const destinationDir = join(process.cwd(), projectName);
+			await copyTemplateAndSubstitute(templateDir, destinationDir, projectName);
 
 			state.succeed("The admin panel has been successfully created");
 		} catch (error) {
@@ -104,7 +108,7 @@ async function promptProjectName(): Promise<string> {
 			type: "input",
 			name: "name",
 			message: "Enter the name of your project",
-			default: "admin-panel",
+			default: "bdadmin-panel",
 		},
 	]);
 	return name;
