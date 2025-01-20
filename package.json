@@ -1,6 +1,6 @@
 {
 	"name": "@bdadmin/cli",
-	"version": "1.0.4",
+	"version": "1.0.3",
 	"description": "is a CLI package responsible for generating an admin panel",
 	"main": "dist/index.js",
 	"bin": {
